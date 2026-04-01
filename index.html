@@ -24,8 +24,8 @@
         }
         .custom-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             background: #0047FF;
             cursor: pointer;
             border-radius: 50%;
@@ -65,26 +65,14 @@
         .nav-link:hover::after { width: 100%; }
 
         /* Logo Management */
-        .logo-container img { display: block; height: 40px; width: auto; max-width: 200px; object-fit: contain; }
-        .logo-container .logo-fallback { display: none; }
-        .logo-container.img-error img { display: none; }
-        .logo-container.img-error .logo-fallback { display: flex; }
+        .logo-box { display: flex; align-items: center; gap: 10px; }
+        .logo-box img { height: 32px; width: auto; object-fit: contain; }
         
-        .icon-box-fallback {
-            background: #00103D;
-            width: 32px;
-            height: 32px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 900;
-            font-size: 16px;
-        }
+        .tier-card { cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
+        .tier-card:hover { transform: translateY(-8px); }
 
-        .tier-card { cursor: pointer; transition: all 0.3s ease; }
-        .tier-card:hover { transform: scale(1.02); }
+        /* Image Placeholder in case of 404 */
+        .img-fallback { background: #00103D; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 900; font-size: 14px; }
     </style>
 </head>
 <body class="antialiased text-slate-900 overflow-x-hidden">
@@ -93,21 +81,11 @@
     <nav class="sticky top-0 z-50 glass-effect border-b border-slate-200">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
-                <div class="flex items-center gap-3 logo-container" id="nav-logo-box">
-                    <!-- Using uploaded official logo -->
-                    <img src="Layer 1 (2).png" 
-                         alt="TUSS.io Logo" 
-                         class="h-10 w-auto"
-                         onload="this.parentElement.classList.remove('img-error')"
-                         onerror="this.parentElement.classList.add('img-error')">
-                    
-                    <div class="logo-fallback items-center gap-2">
-                        <div class="icon-box-fallback">T</div>
-                        <span class="font-black text-xl text-[#00103D] tracking-tighter">TUSS.io</span>
-                    </div>
-                    
+                <div class="logo-box">
+                    <!-- Updated Image tag with fallback -->
+                    <img src="Layer 1 (2).png" alt="TUSS.io Logo" onerror="this.outerHTML='<div class=\'img-fallback\'>T</div><span class=\'font-black text-xl text-[#00103D]\'>TUSS.io</span>'">
                     <div class="h-6 w-px bg-slate-200 mx-1"></div>
-                    <span class="text-xs font-black text-blue-600 uppercase tracking-[0.2em] italic">Partner Portal</span>
+                    <span class="text-sm font-black text-blue-600 uppercase tracking-[0.2em] italic">Partner Portal</span>
                 </div>
                 
                 <div class="hidden md:flex space-x-10 text-sm font-bold text-slate-600">
@@ -150,13 +128,13 @@
     <section id="materials" class="py-24 bg-white border-b border-slate-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-20">
-                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold">Мэдээллийн нэгдсэн сан</span>
-                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 tracking-tight font-black">Борлуулалтын хэрэглэгдэхүүн</h2>
+                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold font-black">мэдээллийн нэгдсэн сан</span>
+                <h2 class="text-4xl md:text-5xl font-black text-slate-900 mt-4 mb-6 tracking-tight font-black uppercase">Борлуулалтын хэрэглэгдэхүүн</h2>
                 <p class="text-slate-500 max-w-2xl mx-auto font-medium leading-relaxed">Харилцагчдад үзүүлэх презентаци, видео заавар болон системчлэлийн бүх материалуудыг нэг дороос ашиглана уу.</p>
             </div>
 
             <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- 1. Presentation -->
+                <!-- Cards with correct Lucide icons and working links -->
                 <a href="https://heyzine.com/flip-book/9ad5be910a.html" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-red-50 text-red-500 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-red-500 group-hover:text-white transition-all duration-500">
@@ -170,7 +148,6 @@
                     </div>
                 </a>
 
-                <!-- 2. Tutorials -->
                 <a href="https://tuss-demo.vercel.app/" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-blue-50 text-blue-500 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-blue-500 group-hover:text-white transition-all duration-500">
@@ -184,7 +161,6 @@
                     </div>
                 </a>
 
-                <!-- 3. Module Intro -->
                 <a href="https://product-livid-pi.vercel.app/" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-amber-50 text-amber-600 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-amber-500 group-hover:text-white transition-all duration-500">
@@ -198,7 +174,6 @@
                     </div>
                 </a>
 
-                <!-- 4. Compliance -->
                 <a href="https://tusscomplaince.vercel.app/" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-emerald-50 text-emerald-600 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-emerald-500 group-hover:text-white transition-all duration-500">
@@ -212,7 +187,6 @@
                     </div>
                 </a>
 
-                <!-- 5. Comparison -->
                 <a href="https://system-v-stuss.vercel.app/" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-purple-50 text-purple-600 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-purple-500 group-hover:text-white transition-all duration-500">
@@ -226,7 +200,6 @@
                     </div>
                 </a>
 
-                <!-- 6. Invoicing -->
                 <a href="https://nehemjleh.vercel.app/" target="_blank" class="group bg-white p-10 rounded-[2.5rem] border border-slate-200 card-shadow section-animate hover:border-blue-600 flex flex-col justify-between">
                     <div>
                         <div class="w-16 h-16 bg-indigo-50 text-indigo-600 rounded-3xl flex items-center justify-center mb-8 group-hover:bg-indigo-500 group-hover:text-white transition-all duration-500">
@@ -243,11 +216,11 @@
         </div>
     </section>
 
-    <!-- Organization Info Section -->
+    <!-- Organization Info -->
     <section id="info" class="py-24 bg-slate-50">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Байгууллагын мэдээлэл</h2>
+                <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">Байгууллагын мэдээлэл</h2>
                 <p class="text-slate-500 font-medium">ТУС Солюшн ХХК болон TUSS.io платформын тухай.</p>
             </div>
             
@@ -255,16 +228,8 @@
                 <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-blue-50 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700"></div>
                 
                 <div class="flex flex-col md:flex-row items-center gap-12 relative z-10 text-center md:text-left">
-                    <div class="w-44 h-44 bg-white rounded-[2.5rem] flex items-center justify-center shrink-0 shadow-sm border border-slate-100 p-8 logo-container" id="org-logo-box-main">
-                        <img src="Layer 1 (2).png" 
-                             alt="TUSS.io Brand" 
-                             class="w-full h-full object-contain"
-                             onload="this.parentElement.classList.remove('img-error')"
-                             onerror="this.parentElement.classList.add('img-error')">
-                        <div class="logo-fallback flex-col items-center justify-center">
-                            <div class="icon-box-fallback !w-20 !h-20 !text-4xl !rounded-3xl mb-2">T</div>
-                            <span class="font-black text-xl text-[#00103D]">TUSS.io</span>
-                        </div>
+                    <div class="w-44 h-44 bg-white rounded-[2.5rem] flex items-center justify-center shrink-0 shadow-sm border border-slate-100 p-8 logo-container">
+                        <img src="Layer 1 (2).png" alt="TUSS.io Brand" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<div class=\'icon-box-fallback !w-24 !h-24 !text-4xl\'>T</div>'">
                     </div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
@@ -283,166 +248,138 @@
         </div>
     </section>
 
-    <!-- Interactive Calculator & Tiers -->
+    <!-- Calculator & Profits -->
     <section id="calculator" class="py-24 bg-white border-t border-slate-100">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="text-center mb-16">
-                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold">Орлого төлөвлөлт</span>
-                <h2 class="text-4xl font-black text-slate-900 mt-4 tracking-tight">Хамтрагчийн ашиг тооцоолох</h2>
-                <p class="text-slate-400 font-medium mt-4 leading-relaxed">Багцын тоог тохируулан авах боломжит шимтгэлээ харна уу.</p>
-            </div>
-            
-            <!-- Calculator Core -->
-            <div class="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden mb-20">
-                <div class="grid lg:grid-cols-12">
-                    <div class="lg:col-span-7 p-10 md:p-16 border-r border-slate-100 bg-white">
-                        <div class="space-y-12">
-                            <!-- Package Sliders -->
-                            <div class="space-y-5">
-                                <div class="flex justify-between items-end">
-                                    <button onclick="openPlanDetails('Starter')" class="group text-left focus:outline-none">
-                                        <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-blue-600 transition">Бага, дунд шатанд</span>
-                                        <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Starter (24,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
-                                    </button>
-                                    <div class="text-right"><span id="val-Starter" class="text-3xl font-black text-blue-600">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
-                                </div>
-                                <input type="range" id="sld-Starter" min="0" max="500" value="0" class="custom-slider" oninput="update('Starter', this.value)">
-                            </div>
-                            <div class="space-y-5">
-                                <div class="flex justify-between items-end">
-                                    <button onclick="openPlanDetails('Standard')" class="group text-left focus:outline-none">
-                                        <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-indigo-600 transition">Дунд, дээд шатанд</span>
-                                        <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Standard (33,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
-                                    </button>
-                                    <div class="text-right"><span id="val-Standard" class="text-3xl font-black text-indigo-600">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
-                                </div>
-                                <input type="range" id="sld-Standard" min="0" max="500" value="0" class="custom-slider" oninput="update('Standard', this.value)">
-                            </div>
-                            <div class="space-y-5">
-                                <div class="flex justify-between items-end">
-                                    <button onclick="openPlanDetails('Premium')" class="group text-left focus:outline-none">
-                                        <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-blue-700 transition">Цогц үйлчилгээ</span>
-                                        <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Premium (55,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
-                                    </button>
-                                    <div class="text-right"><span id="val-Premium" class="text-3xl font-black text-blue-700">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
-                                </div>
-                                <input type="range" id="sld-Premium" min="0" max="500" value="0" class="custom-slider" oninput="update('Premium', this.value)">
-                            </div>
-                            <div class="space-y-5">
-                                <div class="flex justify-between items-end">
-                                    <button onclick="openPlanDetails('Compliance')" class="group text-left focus:outline-none">
-                                        <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-purple-700 transition">Эрсдлийн удирдлага</span>
-                                        <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Compliance (350,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
-                                    </button>
-                                    <div class="text-right"><span id="val-Compliance" class="text-3xl font-black text-purple-700">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
-                                </div>
-                                <input type="range" id="sld-Compliance" min="0" max="100" value="0" class="custom-slider" oninput="update('Compliance', this.value)">
-                            </div>
-                            <div class="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-inner space-y-8 text-center md:text-left">
-                                <div class="flex flex-col md:flex-row justify-between items-center gap-4">
-                                    <div class="flex items-center gap-3">
-                                        <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-slate-200 shadow-sm">
-                                            <i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i>
-                                        </div>
-                                        <span class="text-sm font-black text-slate-900 uppercase tracking-widest">Гэрээний хугацаа</span>
-                                    </div>
-                                    <span id="val-Months" class="text-3xl font-black text-[#0047FF]">1 Сар</span>
-                                </div>
-                                <input type="range" id="sld-Months" min="1" max="24" value="1" class="custom-slider" oninput="update('Months', this.value)">
-                                <div class="flex justify-between text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
-                                    <span>1 Сар</span>
-                                    <span class="text-emerald-600 font-black">12 Сар (-18% Хөнгөлөлт)</span>
-                                    <span>24 Сар</span>
-                                </div>
-                            </div>
+        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
+            <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold">Орлого төлөвлөлт</span>
+            <h2 class="text-4xl font-black text-slate-900 mt-4 tracking-tight uppercase">Хамтрагчийн ашиг тооцоолох</h2>
+            <p class="text-slate-400 font-medium mt-4 leading-relaxed">Багцын тоог тохируулан авах боломжит шимтгэлээ харна уу.</p>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-4 grid lg:grid-cols-12 gap-10">
+            <!-- Left: Controls -->
+            <div class="lg:col-span-7 bg-white rounded-[3rem] p-10 md:p-14 border border-slate-100 shadow-xl space-y-12">
+                <!-- Package Sliders -->
+                <div class="space-y-10">
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <button onclick="openPlanDetails('Starter')" class="group text-left focus:outline-none">
+                                <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-blue-600 transition">Бага, дунд шатанд</span>
+                                <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Starter (24,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
+                            </button>
+                            <div class="text-right"><span id="val-Starter" class="text-3xl font-black text-blue-600">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
                         </div>
+                        <input type="range" id="sld-Starter" min="0" max="500" value="0" class="custom-slider" oninput="update('Starter', this.value)">
                     </div>
-                    <div class="lg:col-span-5 bg-[#00103D] text-white p-10 md:p-16 flex flex-col relative overflow-hidden">
-                        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] pointer-events-none"></div>
-                        <h3 class="text-[11px] font-black mb-10 border-b border-white/10 pb-6 uppercase tracking-[0.4em] text-slate-500 text-center uppercase tracking-widest">Төлбөрийн нэгтгэл</h3>
-                        <div id="summary-container" class="space-y-5 mb-12 min-h-[160px]">
-                            <p class="text-slate-500 text-center py-10 italic opacity-50 text-sm font-medium">Багцын тоог өөрчилж тооцооллыг харна уу...</p>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <button onclick="openPlanDetails('Standard')" class="group text-left focus:outline-none">
+                                <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-indigo-600 transition">Дунд, дээд шатанд</span>
+                                <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Standard (33,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
+                            </button>
+                            <div class="text-right"><span id="val-Standard" class="text-3xl font-black text-indigo-600">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
                         </div>
-                        <div class="mt-auto border-t border-white/10 pt-10">
-                            <div class="flex justify-between items-center mb-4 text-left">
-                                <p class="text-blue-400 text-[11px] font-black uppercase tracking-[0.4em]">Нийт төлөх дүн</p>
-                                <label class="flex items-center gap-2 cursor-pointer group hover:bg-white/5 px-2 py-1 rounded-lg transition-colors">
-                                    <input type="checkbox" id="chk-vat" checked onchange="calculate()" class="w-4 h-4 rounded border-white/20 bg-transparent text-blue-600">
-                                    <span class="text-[10px] font-bold text-slate-400 group-hover:text-white uppercase tracking-widest transition">НӨАТ 10%</span>
-                                </label>
-                            </div>
-                            <div id="display-total" class="text-5xl font-black text-white tracking-tighter mb-4 leading-none text-left">0 ₮</div>
+                        <input type="range" id="sld-Standard" min="0" max="500" value="0" class="custom-slider" oninput="update('Standard', this.value)">
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <button onclick="openPlanDetails('Premium')" class="group text-left focus:outline-none">
+                                <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-blue-700 transition">Цогц үйлчилгээ</span>
+                                <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Premium (55,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
+                            </button>
+                            <div class="text-right"><span id="val-Premium" class="text-3xl font-black text-blue-700">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
                         </div>
+                        <input type="range" id="sld-Premium" min="0" max="500" value="0" class="custom-slider" oninput="update('Premium', this.value)">
+                    </div>
+                    <div class="space-y-4">
+                        <div class="flex justify-between items-end">
+                            <button onclick="openPlanDetails('Compliance')" class="group text-left focus:outline-none">
+                                <span class="block text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1 group-hover:text-purple-700 transition">Эрсдлийн удирдлага</span>
+                                <span class="font-bold text-slate-800 text-lg flex items-center gap-2">Compliance (350,000₮) <i data-lucide="help-circle" class="w-4 h-4 opacity-30"></i></span>
+                            </button>
+                            <div class="text-right"><span id="val-Compliance" class="text-3xl font-black text-purple-700">0</span> <span class="text-slate-400 text-sm font-bold">акк</span></div>
+                        </div>
+                        <input type="range" id="sld-Compliance" min="0" max="100" value="0" class="custom-slider" oninput="update('Compliance', this.value)">
+                    </div>
+                </div>
+
+                <div class="p-8 rounded-[2rem] bg-slate-50 border border-slate-200 shadow-inner space-y-6">
+                    <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 bg-white rounded-xl flex items-center justify-center border border-slate-200 shadow-sm"><i data-lucide="calendar" class="w-5 h-5 text-blue-600"></i></div>
+                            <span class="text-sm font-black text-slate-900 uppercase tracking-widest">Гэрээний хугацаа</span>
+                        </div>
+                        <span id="val-Months" class="text-3xl font-black text-[#0047FF]">1 Сар</span>
+                    </div>
+                    <input type="range" id="sld-Months" min="1" max="24" value="1" class="custom-slider" oninput="update('Months', this.value)">
+                    <div class="flex justify-between text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
+                        <span>1 Сар</span>
+                        <span class="text-emerald-600 font-black">12 Сар (-18% Хөнгөлөлт)</span>
+                        <span>24 Сар</span>
                     </div>
                 </div>
             </div>
 
-            <!-- Tier Cards (Interactive) -->
-            <div class="grid md:grid-cols-3 gap-8">
-                <!-- Associate Tier -->
-                <div onclick="openTierDetails('Associate')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-400 group">
-                    <div class="flex justify-between items-center mb-8">
-                        <div class="w-12 h-12 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center">
-                            <i data-lucide="user" class="w-6 h-6"></i>
+            <!-- Right: Summary & Commissions -->
+            <div class="lg:col-span-5 flex flex-col gap-8">
+                <!-- Summary Card -->
+                <div class="bg-[#00103D] text-white p-10 rounded-[3rem] shadow-xl relative overflow-hidden">
+                    <div class="absolute top-0 right-0 w-40 h-40 bg-blue-500/10 blur-[60px] pointer-events-none"></div>
+                    <h3 class="text-[11px] font-black mb-8 border-b border-white/10 pb-6 uppercase tracking-widest text-slate-500 text-center uppercase tracking-widest font-black">Төлбөрийн нэгтгэл</h3>
+                    <div id="summary-container" class="space-y-4 mb-10 min-h-[140px]">
+                        <p class="text-slate-500 text-center py-8 italic opacity-50 text-sm font-medium">Багцын тоог өөрчилнө үү...</p>
+                    </div>
+                    <div class="mt-auto border-t border-white/10 pt-8">
+                        <div class="flex justify-between items-center mb-4">
+                            <p class="text-blue-400 text-[11px] font-black uppercase tracking-[0.4em]">Нийт төлөх дүн</p>
+                            <label class="flex items-center gap-2 cursor-pointer group px-2 py-1 transition-colors">
+                                <input type="checkbox" id="chk-vat" checked onchange="calculate()" class="w-4 h-4 rounded border-white/20 bg-transparent text-blue-600">
+                                <span class="text-[10px] font-bold text-slate-400 group-hover:text-white uppercase tracking-widest transition">НӨАТ 10%</span>
+                            </label>
                         </div>
-                        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3 py-1 bg-slate-50 rounded-full">0-10 Харилцагч</span>
-                    </div>
-                    <h4 class="text-2xl font-black text-[#00103D] mb-2 uppercase tracking-tighter">Associate</h4>
-                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center">
-                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80">Эхний жил:</span>
-                        <span class="text-xl font-black">15%</span>
-                    </div>
-                    <div class="space-y-1">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Боломжит ашиг:</p>
-                        <div id="tierAssociate" class="text-3xl font-black text-[#00103D]">₮0</div>
-                    </div>
-                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
-                        Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
+                        <div id="display-total" class="text-5xl font-black text-white tracking-tighter leading-none text-left">0 ₮</div>
                     </div>
                 </div>
 
-                <!-- Gold Tier -->
-                <div onclick="openTierDetails('Gold')" class="tier-card bg-[#00103D] p-10 rounded-[3rem] shadow-2xl shadow-blue-900/20 border-2 border-transparent relative overflow-hidden group">
-                    <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl"></div>
-                    <div class="flex justify-between items-center mb-8 relative z-10">
-                        <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/20">
-                            <i data-lucide="crown" class="w-6 h-6"></i>
+                <!-- Interactive Tier Cards (Grid Layout) -->
+                <div class="grid grid-cols-1 gap-6">
+                    <div onclick="openTierDetails('Associate')" class="tier-card bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 card-shadow hover:border-blue-400 flex items-center justify-between group">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
+                                <i data-lucide="user" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-[#00103D] uppercase tracking-tighter mb-1">Associate</h4>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Эхний жил: 15%</p>
+                            </div>
                         </div>
-                        <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest px-3 py-1 bg-amber-500/10 rounded-full">11-30 Харилцагч</span>
+                        <div id="tierAssociate" class="text-2xl font-black text-[#00103D] tracking-tight">₮0</div>
                     </div>
-                    <h4 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter relative z-10">Gold Partner</h4>
-                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center relative z-10">
-                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80 text-blue-100">Эхний жил:</span>
-                        <span class="text-xl font-black">20%</span>
-                    </div>
-                    <div class="space-y-1 relative z-10">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Боломжит ашиг:</p>
-                        <div id="tierGold" class="text-3xl font-black text-white tracking-tight">₮0</div>
-                    </div>
-                    <div class="mt-8 flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest relative z-10">
-                        Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
-                    </div>
-                </div>
 
-                <!-- Platinum Tier -->
-                <div onclick="openTierDetails('Platinum')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-600 group">
-                    <div class="flex justify-between items-center mb-8">
-                        <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
-                            <i data-lucide="award" class="w-6 h-6"></i>
+                    <div onclick="openTierDetails('Gold')" class="tier-card bg-[#00103D] p-8 rounded-[2.5rem] shadow-xl border-2 border-transparent hover:border-amber-500 flex items-center justify-between group">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/20">
+                                <i data-lucide="crown" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-white uppercase tracking-tighter mb-1">Gold Partner</h4>
+                                <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Эхний жил: 20%</p>
+                            </div>
                         </div>
-                        <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest px-3 py-1 bg-blue-50 rounded-full">31+ Харилцагч</span>
+                        <div id="tierGold" class="text-2xl font-black text-white tracking-tight">₮0</div>
                     </div>
-                    <h4 class="text-2xl font-black text-[#00103D] mb-2 uppercase tracking-tighter">Platinum</h4>
-                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center">
-                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80">Эхний жил:</span>
-                        <span class="text-xl font-black">25%</span>
-                    </div>
-                    <div class="space-y-1">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Боломжит ашиг:</p>
-                        <div id="tierPlatinum" class="text-3xl font-black text-[#00103D]">₮0</div>
-                    </div>
-                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
-                        Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
+
+                    <div onclick="openTierDetails('Platinum')" class="tier-card bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 card-shadow hover:border-blue-700 flex items-center justify-between group">
+                        <div class="flex items-center gap-5">
+                            <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
+                                <i data-lucide="award" class="w-7 h-7"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-lg font-black text-[#00103D] uppercase tracking-tighter mb-1">Platinum</h4>
+                                <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Эхний жил: 25%</p>
+                            </div>
+                        </div>
+                        <div id="tierPlatinum" class="text-2xl font-black text-[#00103D] tracking-tight">₮0</div>
                     </div>
                 </div>
             </div>
@@ -452,14 +389,10 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-24 text-center">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="logo-container mx-auto mb-10 opacity-30 grayscale brightness-200 inline-flex items-center gap-3">
-                <img src="Layer 1 (2).png" alt="Footer Logo" class="h-10 w-auto">
-                <div class="logo-fallback items-center gap-2">
-                    <div class="bg-white text-slate-900 p-1.5 rounded-lg font-black text-xl">T</div>
-                    <span class="font-black text-xl text-white tracking-tighter">TUSS.io</span>
-                </div>
+            <div class="logo-box mx-auto mb-10 opacity-30 grayscale brightness-200 inline-flex items-center gap-3">
+                <img src="Layer 1 (2).png" alt="Footer Logo">
             </div>
-            <div class="flex flex-wrap justify-center gap-12 text-xs font-black uppercase tracking-widest mb-12">
+            <div class="flex flex-wrap justify-center gap-12 text-xs font-black uppercase tracking-widest mb-12 font-bold">
                 <a href="#materials" class="hover:text-white transition">Материалууд</a>
                 <a href="#info" class="hover:text-white transition">Мэдээлэл</a>
                 <a href="#calculator" class="hover:text-white transition">Тооцоолуур</a>
@@ -488,9 +421,9 @@
         };
 
         const TIER_DATA = {
-            Associate: { customers: "0-10 байгууллага", rate1: "15%", rate2: "5%", rate3: "3%", icon: "user", color: "blue" },
-            Gold: { customers: "11-30 байгууллага", rate1: "20%", rate2: "7%", rate3: "5%", icon: "crown", color: "amber" },
-            Platinum: { customers: "31+ байгууллага", rate1: "25%", rate2: "10%", rate3: "5%", icon: "award", color: "indigo" }
+            Associate: { customers: "0-10 байгууллага", rate1: "15%", rate2: "5%", rate3: "3%", icon: "user" },
+            Gold: { customers: "11-30 байгууллага", rate1: "20%", rate2: "7%", rate3: "5%", icon: "crown" },
+            Platinum: { customers: "31+ байгууллага", rate1: "25%", rate2: "10%", rate3: "5%", icon: "award" }
         };
 
         function update(key, val) {
@@ -564,8 +497,6 @@
             if (yearDiscount > 0) container.innerHTML += `<div class="flex justify-between text-xs text-emerald-400 font-black mt-1"><span>Хугацааны хөнгөлөлт (-18%):</span><span>-${format(yearDiscount)}</span></div>`;
 
             totalEl.innerText = format(finalTotal);
-            
-            // Updating Tier Profits based on 15, 20, 25% Yr 1 rates
             tierAssociateEl.innerText = format(finalTotal * 0.15);
             tierGoldEl.innerText = format(finalTotal * 0.20);
             tierPlatinumEl.innerText = format(finalTotal * 0.25);
@@ -581,10 +512,10 @@
             body.innerHTML = `
                 <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12 text-left">
                     <div class="w-20 h-20 bg-blue-50 rounded-3xl flex items-center justify-center shrink-0 border border-blue-100 shadow-sm"><i data-lucide="${d.icon}" class="w-10 h-10 text-blue-600"></i></div>
-                    <div><h3 class="text-4xl font-black text-[#00103D] tracking-tight mb-2">${d.title} Багц</h3><p class="text-blue-600 font-black text-xs uppercase tracking-[0.3em]">${d.desc}</p></div>
+                    <div><h3 class="text-4xl font-black text-[#00103D] tracking-tight mb-2">${d.title} Багц</h3><p class="text-blue-600 font-black text-xs uppercase tracking-[0.3em] font-black">${d.desc}</p></div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left">
-                    ${d.features.map(f => `<div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-4 group hover:border-blue-300 transition-all"><div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm"><i data-lucide="check" class="text-emerald-500 w-4 h-4"></i></div><span class="font-bold text-slate-800 text-sm">${f}</span></div>`).join('')}
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-left font-black">
+                    ${d.features.map(f => `<div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl flex items-center gap-4 group hover:border-blue-300 transition-all font-black"><div class="w-8 h-8 bg-white rounded-full flex items-center justify-center shadow-sm font-black"><i data-lucide="check" class="text-emerald-500 w-4 h-4 font-black"></i></div><span class="font-bold text-slate-800 text-sm font-black">${f}</span></div>`).join('')}
                 </div>
                 <button onclick="closeModal()" class="w-full mt-12 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all">Хаах</button>`;
             lucide.createIcons();
@@ -601,7 +532,6 @@
                     <h3 class="text-3xl font-black text-[#00103D] uppercase tracking-tighter mb-2">${t} Түвшний Шалгуур</h3>
                     <div class="px-5 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest">${d.customers}</div>
                 </div>
-                
                 <div class="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-200 shadow-inner">
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex justify-between items-center p-8 bg-blue-600 text-white rounded-3xl shadow-xl shadow-blue-600/20">
@@ -621,11 +551,7 @@
                         </div>
                     </div>
                 </div>
-                
-                <p class="mt-8 text-center text-slate-400 text-sm font-medium italic">
-                    1 харилцагч = 1 байгууллага
-                </p>
-                
+                <p class="mt-8 text-center text-slate-400 text-sm font-medium italic">1 харилцагч = 1 байгууллага</p>
                 <button onclick="closeModal()" class="w-full mt-10 py-5 bg-[#00103D] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg">Ойлголоо</button>
             `;
             lucide.createIcons();
