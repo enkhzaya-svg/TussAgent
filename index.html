@@ -64,15 +64,12 @@
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #0047FF; transition: width 0.3s; }
         .nav-link:hover::after { width: 100%; }
 
-        /* Logo Management */
-        .logo-box { display: flex; align-items: center; gap: 10px; }
-        .logo-box img { height: 32px; width: auto; object-fit: contain; }
+        /* Simplified Logo Box */
+        .logo-box { display: flex; align-items: center; }
+        .logo-box img { height: 45px; width: auto; object-fit: contain; }
         
         .tier-card { cursor: pointer; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); }
         .tier-card:hover { transform: translateY(-8px); }
-
-        /* Image Placeholder in case of 404 */
-        .img-fallback { background: #00103D; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 900; font-size: 14px; }
     </style>
 </head>
 <body class="antialiased text-slate-900 overflow-x-hidden">
@@ -82,10 +79,8 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="logo-box">
-                    <!-- Updated Image path to use GitHub filename -->
-                    <img src="tuss_logo.png" alt="TUSS.io Logo" onerror="this.outerHTML='<div class=\'img-fallback\'>T</div><span class=\'font-black text-xl text-[#00103D]\'>TUSS.io</span>'">
-                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
-                    <span class="text-sm font-black text-blue-600 uppercase tracking-[0.2em] italic">Partner Portal</span>
+                    <!-- Only the logo, no extra text or dividers -->
+                    <img src="tuss_logo.png" alt="TUSS.io Logo">
                 </div>
                 
                 <div class="hidden md:flex space-x-10 text-sm font-bold text-slate-600">
@@ -215,11 +210,11 @@
         </div>
     </section>
 
-    <!-- Organization Info -->
+    <!-- Organization Info Section -->
     <section id="info" class="py-24 bg-slate-50">
         <div class="max-w-5xl mx-auto px-4">
             <div class="text-center mb-16">
-                <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight uppercase">Байгууллагын мэдээлэл</h2>
+                <h2 class="text-3xl font-black text-slate-900 mb-4 tracking-tight">Байгууллагын мэдээлэл</h2>
                 <p class="text-slate-500 font-medium">ТУС Солюшн ХХК болон TUSS.io платформын тухай.</p>
             </div>
             
@@ -228,7 +223,7 @@
                 
                 <div class="flex flex-col md:flex-row items-center gap-12 relative z-10 text-center md:text-left">
                     <div class="w-44 h-44 bg-white rounded-[2.5rem] flex items-center justify-center shrink-0 shadow-sm border border-slate-100 p-8 logo-container">
-                        <img src="tuss_logo.png" alt="TUSS.io Brand" class="w-full h-full object-contain" onerror="this.parentElement.innerHTML='<div class=\'icon-box-fallback !w-24 !h-24 !text-4xl\'>T</div>'">
+                        <img src="tuss_logo.png" alt="TUSS.io Brand" class="w-full h-full object-contain">
                     </div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
@@ -247,7 +242,7 @@
         </div>
     </section>
 
-    <!-- Calculator & Profits -->
+    <!-- Interactive Calculator & Profits -->
     <section id="calculator" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4 text-center mb-16">
             <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold">Орлого төлөвлөлт</span>
@@ -338,14 +333,13 @@
                     </div>
                 </div>
 
-                <div class="grid grid-cols-1 gap-6">
-                    <!-- Associate -->
+                <div class="grid grid-cols-1 gap-6 text-left">
                     <div onclick="openTierDetails('Associate')" class="tier-card bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 card-shadow hover:border-blue-400 flex items-center justify-between group">
                         <div class="flex items-center gap-5">
                             <div class="w-14 h-14 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center group-hover:bg-blue-600 group-hover:text-white transition-colors">
                                 <i data-lucide="user" class="w-7 h-7"></i>
                             </div>
-                            <div class="text-left">
+                            <div>
                                 <h4 class="text-lg font-black text-[#00103D] uppercase tracking-tighter mb-1">Associate</h4>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Эхний жил: 15%</p>
                             </div>
@@ -353,13 +347,12 @@
                         <div id="tierAssociate" class="text-2xl font-black text-[#00103D] tracking-tight">₮0</div>
                     </div>
 
-                    <!-- Gold -->
                     <div onclick="openTierDetails('Gold')" class="tier-card bg-[#00103D] p-8 rounded-[2.5rem] shadow-xl border-2 border-transparent hover:border-amber-500 flex items-center justify-between group">
                         <div class="flex items-center gap-5">
                             <div class="w-14 h-14 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/20">
                                 <i data-lucide="crown" class="w-7 h-7"></i>
                             </div>
-                            <div class="text-left">
+                            <div>
                                 <h4 class="text-lg font-black text-white uppercase tracking-tighter mb-1">Gold Partner</h4>
                                 <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest">Эхний жил: 20%</p>
                             </div>
@@ -367,13 +360,12 @@
                         <div id="tierGold" class="text-2xl font-black text-white tracking-tight">₮0</div>
                     </div>
 
-                    <!-- Platinum -->
                     <div onclick="openTierDetails('Platinum')" class="tier-card bg-white p-8 rounded-[2.5rem] border-2 border-slate-100 card-shadow hover:border-blue-700 flex items-center justify-between group">
                         <div class="flex items-center gap-5">
                             <div class="w-14 h-14 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center group-hover:bg-blue-700 group-hover:text-white transition-colors">
                                 <i data-lucide="award" class="w-7 h-7"></i>
                             </div>
-                            <div class="text-left">
+                            <div>
                                 <h4 class="text-lg font-black text-[#00103D] uppercase tracking-tighter mb-1">Platinum</h4>
                                 <p class="text-[10px] font-bold text-slate-400 uppercase tracking-widest">Эхний жил: 25%</p>
                             </div>
@@ -388,7 +380,7 @@
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-24 text-center">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="logo-box mx-auto mb-10 opacity-30 grayscale brightness-200 inline-flex items-center gap-3">
+            <div class="logo-box mx-auto mb-10 opacity-30 grayscale brightness-200 justify-center">
                 <img src="tuss_logo.png" alt="Footer Logo">
             </div>
             <div class="flex flex-wrap justify-center gap-12 text-xs font-black uppercase tracking-widest mb-12 font-bold">
@@ -529,12 +521,12 @@
                 <div class="flex flex-col items-center text-center mb-12">
                     <div class="w-20 h-20 bg-blue-600 text-white rounded-[2rem] flex items-center justify-center mb-6 shadow-xl shadow-blue-600/20"><i data-lucide="${d.icon}" class="w-10 h-10"></i></div>
                     <h3 class="text-3xl font-black text-[#00103D] uppercase tracking-tighter mb-2">${t} Түвшний Шалгуур</h3>
-                    <div class="px-5 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest">${d.customers}</div>
+                    <div class="px-5 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest font-black">${d.customers}</div>
                 </div>
                 <div class="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-200 shadow-inner">
                     <div class="grid grid-cols-1 gap-4">
                         <div class="flex justify-between items-center p-8 bg-blue-600 text-white rounded-3xl shadow-xl shadow-blue-600/20">
-                            <div class="text-left">
+                            <div class="text-left font-black">
                                 <p class="text-[10px] font-black uppercase tracking-widest opacity-70 mb-1">Эхний жил (Тусгай хувь)</p>
                                 <span class="text-sm font-bold opacity-90">Борлуулалтын шимтгэл:</span>
                             </div>
