@@ -13,6 +13,7 @@
         .card-shadow { box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.05); }
         .glass-effect { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(12px); }
         
+        /* Custom Slider Styling */
         .custom-slider {
             -webkit-appearance: none;
             width: 100%;
@@ -23,8 +24,8 @@
         }
         .custom-slider::-webkit-slider-thumb {
             -webkit-appearance: none;
-            width: 22px;
-            height: 22px;
+            width: 24px;
+            height: 24px;
             background: #0047FF;
             cursor: pointer;
             border-radius: 50%;
@@ -32,8 +33,9 @@
             box-shadow: 0 10px 15px -3px rgba(0, 71, 255, 0.3);
             transition: all 0.2s ease;
         }
-        .custom-slider::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        .custom-slider::-webkit-slider-thumb:hover { transform: scale(1.1); box-shadow: 0 10px 20px -3px rgba(0, 71, 255, 0.4); }
 
+        /* Modal Transitions */
         .modal-overlay {
             display: none;
             position: fixed;
@@ -47,7 +49,7 @@
         .modal-content {
             background: white;
             border-radius: 2.5rem;
-            max-width: 750px; width: 100%;
+            max-width: 800px; width: 100%;
             position: relative;
             max-height: 90vh;
             overflow-y: auto;
@@ -62,7 +64,8 @@
         .nav-link::after { content: ''; position: absolute; width: 0; height: 2px; bottom: -4px; left: 0; background: #0047FF; transition: width 0.3s; }
         .nav-link:hover::after { width: 100%; }
 
-        .logo-container img { display: block; height: 100%; width: auto; max-width: 180px; }
+        /* Logo Management */
+        .logo-container img { display: block; height: 40px; width: auto; max-width: 200px; object-fit: contain; }
         .logo-container .logo-fallback { display: none; }
         .logo-container.img-error img { display: none; }
         .logo-container.img-error .logo-fallback { display: flex; }
@@ -79,8 +82,7 @@
             font-weight: 900;
             font-size: 16px;
         }
-        
-        /* Tier Card hover */
+
         .tier-card { cursor: pointer; transition: all 0.3s ease; }
         .tier-card:hover { transform: scale(1.02); }
     </style>
@@ -92,9 +94,10 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-20 items-center">
                 <div class="flex items-center gap-3 logo-container" id="nav-logo-box">
+                    <!-- Using uploaded official logo -->
                     <img src="Layer 1 (2).png" 
                          alt="TUSS.io Logo" 
-                         class="h-10 w-auto object-contain"
+                         class="h-10 w-auto"
                          onload="this.parentElement.classList.remove('img-error')"
                          onerror="this.parentElement.classList.add('img-error')">
                     
@@ -265,7 +268,7 @@
                     </div>
                     <div class="flex-1">
                         <div class="flex flex-col md:flex-row md:items-center gap-4 mb-6">
-                            <h3 class="text-3xl font-black text-slate-900 group-hover:text-blue-600 transition">ТУС Солюшн ХХК</h3>
+                            <h3 class="text-3xl font-black text-slate-900 group-hover:text-blue-600 transition tracking-tight">ТУС Солюшн ХХК</h3>
                             <span class="inline-block bg-blue-50 text-blue-600 px-4 py-1 rounded-full text-[10px] font-black uppercase tracking-widest w-fit mx-auto md:mx-0">Official Resource</span>
                         </div>
                         <p class="text-slate-600 mb-8 text-base leading-relaxed font-medium">
@@ -280,21 +283,21 @@
         </div>
     </section>
 
-    <!-- Interactive Calculator (WITH TIER CARDS) -->
+    <!-- Interactive Calculator & Tiers -->
     <section id="calculator" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
-                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs">Орлого төлөвлөлт</span>
+                <span class="text-blue-600 font-black uppercase tracking-[0.3em] text-xs font-bold">Орлого төлөвлөлт</span>
                 <h2 class="text-4xl font-black text-slate-900 mt-4 tracking-tight">Хамтрагчийн ашиг тооцоолох</h2>
-                <p class="text-slate-400 font-medium mt-4">Багцын тоог тохируулан авах боломжит шимтгэлээ харна уу.</p>
+                <p class="text-slate-400 font-medium mt-4 leading-relaxed">Багцын тоог тохируулан авах боломжит шимтгэлээ харна уу.</p>
             </div>
             
-            <div class="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden mb-16">
+            <!-- Calculator Core -->
+            <div class="bg-white rounded-[3.5rem] shadow-2xl border border-slate-100 overflow-hidden mb-20">
                 <div class="grid lg:grid-cols-12">
-                    <!-- Inputs Left -->
                     <div class="lg:col-span-7 p-10 md:p-16 border-r border-slate-100 bg-white">
                         <div class="space-y-12">
-                            <!-- Starter -->
+                            <!-- Package Sliders -->
                             <div class="space-y-5">
                                 <div class="flex justify-between items-end">
                                     <button onclick="openPlanDetails('Starter')" class="group text-left focus:outline-none">
@@ -305,7 +308,6 @@
                                 </div>
                                 <input type="range" id="sld-Starter" min="0" max="500" value="0" class="custom-slider" oninput="update('Starter', this.value)">
                             </div>
-                            <!-- Standard -->
                             <div class="space-y-5">
                                 <div class="flex justify-between items-end">
                                     <button onclick="openPlanDetails('Standard')" class="group text-left focus:outline-none">
@@ -316,7 +318,6 @@
                                 </div>
                                 <input type="range" id="sld-Standard" min="0" max="500" value="0" class="custom-slider" oninput="update('Standard', this.value)">
                             </div>
-                            <!-- Premium -->
                             <div class="space-y-5">
                                 <div class="flex justify-between items-end">
                                     <button onclick="openPlanDetails('Premium')" class="group text-left focus:outline-none">
@@ -327,7 +328,6 @@
                                 </div>
                                 <input type="range" id="sld-Premium" min="0" max="500" value="0" class="custom-slider" oninput="update('Premium', this.value)">
                             </div>
-                            <!-- Compliance -->
                             <div class="space-y-5">
                                 <div class="flex justify-between items-end">
                                     <button onclick="openPlanDetails('Compliance')" class="group text-left focus:outline-none">
@@ -338,7 +338,6 @@
                                 </div>
                                 <input type="range" id="sld-Compliance" min="0" max="100" value="0" class="custom-slider" oninput="update('Compliance', this.value)">
                             </div>
-                            <!-- Duration -->
                             <div class="p-10 rounded-[2.5rem] bg-slate-50 border border-slate-200 shadow-inner space-y-8 text-center md:text-left">
                                 <div class="flex flex-col md:flex-row justify-between items-center gap-4">
                                     <div class="flex items-center gap-3">
@@ -352,13 +351,12 @@
                                 <input type="range" id="sld-Months" min="1" max="24" value="1" class="custom-slider" oninput="update('Months', this.value)">
                                 <div class="flex justify-between text-[10px] text-blue-400 font-black uppercase tracking-[0.2em]">
                                     <span>1 Сар</span>
-                                    <span class="text-emerald-600 font-black">12 Сар (-18%)</span>
+                                    <span class="text-emerald-600 font-black">12 Сар (-18% Хөнгөлөлт)</span>
                                     <span>24 Сар</span>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <!-- Summary Right -->
                     <div class="lg:col-span-5 bg-[#00103D] text-white p-10 md:p-16 flex flex-col relative overflow-hidden">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] pointer-events-none"></div>
                         <h3 class="text-[11px] font-black mb-10 border-b border-white/10 pb-6 uppercase tracking-[0.4em] text-slate-500 text-center uppercase tracking-widest">Төлбөрийн нэгтгэл</h3>
@@ -366,7 +364,7 @@
                             <p class="text-slate-500 text-center py-10 italic opacity-50 text-sm font-medium">Багцын тоог өөрчилж тооцооллыг харна уу...</p>
                         </div>
                         <div class="mt-auto border-t border-white/10 pt-10">
-                            <div class="flex justify-between items-center mb-4">
+                            <div class="flex justify-between items-center mb-4 text-left">
                                 <p class="text-blue-400 text-[11px] font-black uppercase tracking-[0.4em]">Нийт төлөх дүн</p>
                                 <label class="flex items-center gap-2 cursor-pointer group hover:bg-white/5 px-2 py-1 rounded-lg transition-colors">
                                     <input type="checkbox" id="chk-vat" checked onchange="calculate()" class="w-4 h-4 rounded border-white/20 bg-transparent text-blue-600">
@@ -379,10 +377,10 @@
                 </div>
             </div>
 
-            <!-- TIER CARDS SECTION -->
+            <!-- Tier Cards (Interactive) -->
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Associate -->
-                <div onclick="openTierDetails('Associate')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-400">
+                <!-- Associate Tier -->
+                <div onclick="openTierDetails('Associate')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-400 group">
                     <div class="flex justify-between items-center mb-8">
                         <div class="w-12 h-12 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center">
                             <i data-lucide="user" class="w-6 h-6"></i>
@@ -390,22 +388,21 @@
                         <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest px-3 py-1 bg-slate-50 rounded-full">0-10 Харилцагч</span>
                     </div>
                     <h4 class="text-2xl font-black text-[#00103D] mb-2 uppercase tracking-tighter">Associate</h4>
-                    <div class="flex items-baseline gap-2 mb-8">
-                        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Эхний жил:</span>
-                        <span class="text-2xl font-black text-blue-600">15%</span>
+                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center">
+                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80">Эхний жил:</span>
+                        <span class="text-xl font-black">15%</span>
                     </div>
-                    <hr class="border-slate-100 mb-8">
                     <div class="space-y-1">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Таны авах дүн:</p>
-                        <div id="tierAssociate" class="text-4xl font-black text-[#00103D]">₮0</div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Боломжит ашиг:</p>
+                        <div id="tierAssociate" class="text-3xl font-black text-[#00103D]">₮0</div>
                     </div>
-                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest group">
+                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
                         Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </div>
 
-                <!-- Gold -->
-                <div onclick="openTierDetails('Gold')" class="tier-card bg-[#00103D] p-10 rounded-[3rem] shadow-2xl shadow-blue-900/20 border-2 border-transparent relative overflow-hidden">
+                <!-- Gold Tier -->
+                <div onclick="openTierDetails('Gold')" class="tier-card bg-[#00103D] p-10 rounded-[3rem] shadow-2xl shadow-blue-900/20 border-2 border-transparent relative overflow-hidden group">
                     <div class="absolute -right-10 -top-10 w-40 h-40 bg-blue-600/10 rounded-full blur-3xl"></div>
                     <div class="flex justify-between items-center mb-8 relative z-10">
                         <div class="w-12 h-12 bg-amber-500 text-white rounded-2xl flex items-center justify-center shadow-lg shadow-amber-500/20">
@@ -414,22 +411,21 @@
                         <span class="text-[10px] font-black text-amber-500 uppercase tracking-widest px-3 py-1 bg-amber-500/10 rounded-full">11-30 Харилцагч</span>
                     </div>
                     <h4 class="text-2xl font-black text-white mb-2 uppercase tracking-tighter relative z-10">Gold Partner</h4>
-                    <div class="flex items-baseline gap-2 mb-8 relative z-10">
-                        <span class="text-sm font-bold text-slate-500 uppercase tracking-widest">Эхний жил:</span>
-                        <span class="text-2xl font-black text-amber-500">20%</span>
+                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center relative z-10">
+                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80 text-blue-100">Эхний жил:</span>
+                        <span class="text-xl font-black">20%</span>
                     </div>
-                    <hr class="border-white/5 mb-8 relative z-10">
                     <div class="space-y-1 relative z-10">
-                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Таны авах дүн:</p>
-                        <div id="tierGold" class="text-4xl font-black text-white tracking-tight">₮0</div>
+                        <p class="text-[10px] font-black text-slate-500 uppercase tracking-widest">Боломжит ашиг:</p>
+                        <div id="tierGold" class="text-3xl font-black text-white tracking-tight">₮0</div>
                     </div>
-                    <div class="mt-8 flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest relative z-10 group">
+                    <div class="mt-8 flex items-center gap-2 text-amber-500 font-bold text-xs uppercase tracking-widest relative z-10">
                         Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </div>
 
-                <!-- Platinum -->
-                <div onclick="openTierDetails('Platinum')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-600">
+                <!-- Platinum Tier -->
+                <div onclick="openTierDetails('Platinum')" class="tier-card bg-white p-10 rounded-[3rem] border-2 border-slate-100 card-shadow hover:border-blue-600 group">
                     <div class="flex justify-between items-center mb-8">
                         <div class="w-12 h-12 bg-blue-50 text-blue-600 rounded-2xl flex items-center justify-center">
                             <i data-lucide="award" class="w-6 h-6"></i>
@@ -437,16 +433,15 @@
                         <span class="text-[10px] font-black text-blue-600 uppercase tracking-widest px-3 py-1 bg-blue-50 rounded-full">31+ Харилцагч</span>
                     </div>
                     <h4 class="text-2xl font-black text-[#00103D] mb-2 uppercase tracking-tighter">Platinum</h4>
-                    <div class="flex items-baseline gap-2 mb-8">
-                        <span class="text-sm font-bold text-slate-400 uppercase tracking-widest">Эхний жил:</span>
-                        <span class="text-2xl font-black text-blue-700">25%</span>
+                    <div class="bg-blue-600 text-white px-4 py-3 rounded-xl mb-8 flex justify-between items-center">
+                        <span class="text-[11px] font-black uppercase tracking-widest opacity-80">Эхний жил:</span>
+                        <span class="text-xl font-black">25%</span>
                     </div>
-                    <hr class="border-slate-100 mb-8">
                     <div class="space-y-1">
-                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Таны авах дүн:</p>
-                        <div id="tierPlatinum" class="text-4xl font-black text-[#00103D]">₮0</div>
+                        <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest">Боломжит ашиг:</p>
+                        <div id="tierPlatinum" class="text-3xl font-black text-[#00103D]">₮0</div>
                     </div>
-                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest group">
+                    <div class="mt-8 flex items-center gap-2 text-blue-600 font-bold text-xs uppercase tracking-widest">
                         Шалгуур үзэх <i data-lucide="chevron-right" class="w-4 h-4 group-hover:translate-x-2 transition-transform"></i>
                     </div>
                 </div>
@@ -473,7 +468,7 @@
         </div>
     </footer>
 
-    <!-- Modal -->
+    <!-- Modal Container -->
     <div id="main-modal" class="modal-overlay" onclick="closeModal()">
         <div class="modal-content shadow-2xl" onclick="event.stopPropagation()">
             <button onclick="closeModal()" class="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors text-slate-500 z-10"><i data-lucide="x" class="w-6 h-6"></i></button>
@@ -493,9 +488,9 @@
         };
 
         const TIER_DATA = {
-            Associate: { customers: "0-10 байгууллага", rate1: "15%", rate2: "5%", rate3: "3%", icon: "user" },
-            Gold: { customers: "11-30 байгууллага", rate1: "20%", rate2: "7%", rate3: "5%", icon: "crown" },
-            Platinum: { customers: "31+ байгууллага", rate1: "25%", rate2: "10%", rate3: "5%", icon: "award" }
+            Associate: { customers: "0-10 байгууллага", rate1: "15%", rate2: "5%", rate3: "3%", icon: "user", color: "blue" },
+            Gold: { customers: "11-30 байгууллага", rate1: "20%", rate2: "7%", rate3: "5%", icon: "crown", color: "amber" },
+            Platinum: { customers: "31+ байгууллага", rate1: "25%", rate2: "10%", rate3: "5%", icon: "award", color: "indigo" }
         };
 
         function update(key, val) {
@@ -569,6 +564,8 @@
             if (yearDiscount > 0) container.innerHTML += `<div class="flex justify-between text-xs text-emerald-400 font-black mt-1"><span>Хугацааны хөнгөлөлт (-18%):</span><span>-${format(yearDiscount)}</span></div>`;
 
             totalEl.innerText = format(finalTotal);
+            
+            // Updating Tier Profits based on 15, 20, 25% Yr 1 rates
             tierAssociateEl.innerText = format(finalTotal * 0.15);
             tierGoldEl.innerText = format(finalTotal * 0.20);
             tierPlatinumEl.innerText = format(finalTotal * 0.25);
@@ -600,30 +597,36 @@
             const body = document.getElementById('modal-body');
             body.innerHTML = `
                 <div class="flex flex-col items-center text-center mb-12">
-                    <div class="w-20 h-20 bg-blue-600 text-white rounded-[1.5rem] flex items-center justify-center mb-6 shadow-xl shadow-blue-600/20"><i data-lucide="${d.icon}" class="w-10 h-10"></i></div>
-                    <h3 class="text-3xl font-black text-[#00103D] uppercase tracking-tighter mb-2">${t} түвшний нөхцөл</h3>
-                    <div class="px-4 py-1.5 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest">${d.customers}</div>
+                    <div class="w-20 h-20 bg-blue-600 text-white rounded-[2rem] flex items-center justify-center mb-6 shadow-xl shadow-blue-600/20"><i data-lucide="${d.icon}" class="w-10 h-10"></i></div>
+                    <h3 class="text-3xl font-black text-[#00103D] uppercase tracking-tighter mb-2">${t} Түвшний Шалгуур</h3>
+                    <div class="px-5 py-2 bg-blue-50 text-blue-600 rounded-full text-xs font-black uppercase tracking-widest">${d.customers}</div>
                 </div>
-                <div class="bg-slate-50 rounded-[2.5rem] p-10 overflow-hidden border border-slate-200">
-                    <div class="grid grid-cols-1 gap-6">
-                        <div class="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-100 shadow-sm">
-                            <span class="font-bold text-slate-500 uppercase tracking-widest text-xs">Эхний жилийн шимтгэл:</span>
-                            <span class="text-3xl font-black text-blue-600">${d.rate1}</span>
+                
+                <div class="bg-slate-50 rounded-[2.5rem] p-10 border border-slate-200 shadow-inner">
+                    <div class="grid grid-cols-1 gap-4">
+                        <div class="flex justify-between items-center p-8 bg-blue-600 text-white rounded-3xl shadow-xl shadow-blue-600/20">
+                            <div>
+                                <p class="text-[10px] font-black uppercase tracking-widest opacity-70 mb-1">Эхний жил (Тусгай хувь)</p>
+                                <span class="text-sm font-bold opacity-90">Борлуулалтын шимтгэл:</span>
+                            </div>
+                            <span class="text-5xl font-black">${d.rate1}</span>
                         </div>
-                        <div class="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-100 shadow-sm opacity-80">
-                            <span class="font-bold text-slate-500 uppercase tracking-widest text-xs">2 дахь жилийн сунгалт:</span>
-                            <span class="text-2xl font-black text-slate-700">${d.rate2}</span>
+                        <div class="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-200">
+                            <span class="font-black text-slate-500 uppercase tracking-widest text-xs">2 дахь жилийн сунгалт:</span>
+                            <span class="text-2xl font-black text-slate-900">${d.rate2}</span>
                         </div>
-                        <div class="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-100 shadow-sm opacity-60">
-                            <span class="font-bold text-slate-500 uppercase tracking-widest text-xs">3 дахь жилийн сунгалт:</span>
-                            <span class="text-2xl font-black text-slate-700">${d.rate3}</span>
+                        <div class="flex justify-between items-center p-6 bg-white rounded-2xl border border-slate-200">
+                            <span class="font-black text-slate-500 uppercase tracking-widest text-xs">3 дахь жилийн сунгалт:</span>
+                            <span class="text-2xl font-black text-slate-900">${d.rate3}</span>
                         </div>
                     </div>
                 </div>
-                <p class="mt-8 text-xs text-center text-slate-400 font-medium leading-relaxed italic">
-                    * Шимтгэлийн хувь хэмжээ нь таны нийт бүртгүүлсэн идэвхтэй харилцагч байгууллагын тооноос хамааран автоматаар шинэчлэгддэг.
+                
+                <p class="mt-8 text-center text-slate-400 text-sm font-medium italic">
+                    1 харилцагч = 1 байгууллага
                 </p>
-                <button onclick="closeModal()" class="w-full mt-10 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg">Ойлголоо</button>
+                
+                <button onclick="closeModal()" class="w-full mt-10 py-5 bg-[#00103D] text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all shadow-lg">Ойлголоо</button>
             `;
             lucide.createIcons();
             document.getElementById('main-modal').style.display = 'flex';
