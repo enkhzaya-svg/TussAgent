@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TUSS.io | Partner Resource Center</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background-color: #f8fafc; }
+        .brand-gradient { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); }
+        .card-shadow { box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05); }
+        
+        .custom-slider {
+            -webkit-appearance: none;
+            width: 100%;
+            height: 6px;
+            background: #E2E8F0;
+            border-radius: 10px;
+            outline: none;
+        }
+        .custom-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 22px;
+            height: 22px;
+            background: #0047FF;
+            cursor: pointer;
+            border-radius: 50%;
+            border: 4px solid white;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            transition: transform 0.2s;
+        }
+        .custom-slider::-webkit-slider-thumb:hover { transform: scale(1.15); }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 16, 61, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 100;
+            align-items: center; justify-content: center;
+            padding: 20px;
+        }
+        .modal-content {
+            background: white;
+            border-radius: 2rem;
+            max-width: 850px; width: 100%;
+            position: relative;
+            max-height: 95vh;
+            overflow-y: auto;
+            animation: slideUp 0.3s ease-out;
+        }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        .section-animate { transition: transform 0.3s ease; }
+        .section-animate:hover { transform: translateY(-2px); }
+    </style>
+</head>
+<body class="antialiased text-slate-900">
+
+    <!-- Navbar -->
+    <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-20 items-center">
+                <div class="flex items-center gap-3">
+                    <img src="Layer 1 (2).png" alt="TUSS.io Logo" class="h-10 w-auto object-contain" onerror="this.src='https://via.placeholder.com/150x50?text=TUSS.io'">
+                    <div class="h-6 w-px bg-slate-200 mx-1"></div>
+                    <span class="text-sm font-black text-blue-600 uppercase tracking-[0.2em] italic">Partner</span>
+                </div>
+                <div class="hidden md:flex space-x-8 text-sm font-semibold text-slate-600">
+                    <a href="#calculator" class="hover:text-blue-600 transition">Тооцоолуур</a>
+                    <a href="#materials" class="hover:text-blue-600 transition">Материалууд</a>
+                    <a href="#info" class="hover:text-blue-600 transition">Байгууллага</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <section class="brand-gradient text-white py-16 relative overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10">
+            <h1 class="text-4xl md:text-5xl font-extrabold mb-4 tracking-tight">Зөвлөхүүдийн мэдээллийн сан</h1>
+            <p class="text-lg opacity-80 max-w-2xl mx-auto mb-8">
+                Системчлэлийн шийдлийг зөв тооцоолж, хамтрагчийн ашгаа бодитоор төлөвлөөрэй.
+            </p>
+        </div>
+    </section>
+
+    <!-- Advanced Pricing Calculator -->
+    <section id="calculator" class="py-12 -mt-10 relative z-20">
+        <div class="max-w-6xl mx-auto px-4">
+            <div class="bg-white rounded-[2.5rem] shadow-2xl border border-slate-100 overflow-hidden">
+                <div class="grid lg:grid-cols-12">
+                    
+                    <!-- Inputs Column -->
+                    <div class="lg:col-span-7 p-8 md:p-12 border-r border-slate-100">
+                        <h3 class="text-xl font-black mb-10 flex items-center gap-3 text-[#00103D]">
+                            <i data-lucide="sliders" class="text-[#0047FF] w-6 h-6"></i> Багцаа сонгоно уу
+                        </h3>
+
+                        <div class="space-y-10">
+                            <!-- Starter -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <button onclick="openPlanDetails('Starter')" class="font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+                                        Starter (24,000₮) <i data-lucide="info" class="w-4 h-4 opacity-30"></i>
+                                    </button>
+                                    <span id="val-Starter" class="text-2xl font-black text-blue-600">0</span>
+                                </div>
+                                <input type="range" id="sld-Starter" min="0" max="500" value="0" class="custom-slider" oninput="update('Starter', this.value)">
+                            </div>
+
+                            <!-- Standard -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <button onclick="openPlanDetails('Standard')" class="font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+                                        Standard (33,000₮) <i data-lucide="info" class="w-4 h-4 opacity-30"></i>
+                                    </button>
+                                    <span id="val-Standard" class="text-2xl font-black text-indigo-600">0</span>
+                                </div>
+                                <input type="range" id="sld-Standard" min="0" max="500" value="0" class="custom-slider" oninput="update('Standard', this.value)">
+                            </div>
+
+                            <!-- Premium -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <button onclick="openPlanDetails('Premium')" class="font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+                                        Premium (55,000₮) <i data-lucide="info" class="w-4 h-4 opacity-30"></i>
+                                    </button>
+                                    <span id="val-Premium" class="text-2xl font-black text-blue-700">0</span>
+                                </div>
+                                <input type="range" id="sld-Premium" min="0" max="500" value="0" class="custom-slider" oninput="update('Premium', this.value)">
+                            </div>
+
+                            <!-- Compliance -->
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center">
+                                    <button onclick="openPlanDetails('Compliance')" class="font-bold text-slate-700 hover:text-blue-600 transition-colors flex items-center gap-1">
+                                        Compliance (350,000₮) <i data-lucide="info" class="w-4 h-4 opacity-30"></i>
+                                    </button>
+                                    <span id="val-Compliance" class="text-2xl font-black text-purple-700">0</span>
+                                </div>
+                                <input type="range" id="sld-Compliance" min="0" max="100" value="0" class="custom-slider" oninput="update('Compliance', this.value)">
+                            </div>
+
+                            <!-- Duration Selection -->
+                            <div class="p-6 rounded-[2rem] bg-blue-50 border-2 border-blue-100 shadow-sm space-y-6">
+                                <div class="flex justify-between items-center text-left">
+                                    <label class="text-xs font-black text-blue-900 uppercase tracking-widest flex items-center gap-2">
+                                        <i data-lucide="calendar" class="w-4 h-4 text-blue-600"></i> Гэрээний хугацаа:
+                                    </label>
+                                    <span id="val-Months" class="text-2xl font-black text-[#0047FF]">1 Сар</span>
+                                </div>
+                                <input type="range" id="sld-Months" min="1" max="24" value="1" class="custom-slider" oninput="update('Months', this.value)">
+                                <div class="flex justify-between text-[10px] text-blue-400 font-bold uppercase tracking-widest">
+                                    <span>1 Сар</span>
+                                    <span>12 Сар (-18% хөнгөлөлт)</span>
+                                    <span>24 Сар</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Summary Column -->
+                    <div class="lg:col-span-5 bg-[#00103D] text-white p-10 md:p-12 flex flex-col">
+                        <h3 class="text-sm font-black mb-8 border-b border-white/5 pb-6 uppercase tracking-widest text-slate-500 text-center">Төлбөрийн нэгтгэл</h3>
+                        
+                        <div id="summary-container" class="space-y-4 mb-8">
+                            <p class="text-slate-500 text-center py-6 italic opacity-50">Багцаа сонгоно уу...</p>
+                        </div>
+
+                        <div class="mt-auto">
+                            <div class="flex justify-between items-center mb-2">
+                                <p class="text-blue-400 text-[11px] font-black uppercase tracking-[0.3em]">Нийт төлөх дүн</p>
+                                <label class="flex items-center gap-2 cursor-pointer group">
+                                    <input type="checkbox" id="chk-vat" checked onchange="calculate()" class="w-3 h-3 rounded border-white/20 bg-transparent text-blue-600">
+                                    <span class="text-[9px] font-bold text-slate-400 group-hover:text-white uppercase tracking-widest">НӨАТ</span>
+                                </label>
+                            </div>
+                            <div id="display-total" class="text-5xl font-black text-white tracking-tighter mb-10 leading-none text-left">0 ₮</div>
+                            
+                            <!-- AGENT PROFIT TIERS -->
+                            <div class="space-y-4 pt-8 border-t border-white/10">
+                                <h4 class="text-[10px] font-black uppercase tracking-widest text-slate-500 mb-2">Агентын авах шимтгэл</h4>
+                                
+                                <div class="bg-blue-600 rounded-2xl p-4 shadow-lg shadow-blue-500/20">
+                                    <div class="flex justify-between items-center mb-1">
+                                        <span class="text-[10px] font-black uppercase opacity-70">Алтан Хамтрагч (10%)</span>
+                                        <div class="w-1.5 h-1.5 bg-yellow-400 rounded-full animate-pulse"></div>
+                                    </div>
+                                    <div id="tier10" class="text-2xl font-black">₮0</div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-3">
+                                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                        <span class="text-[9px] font-black uppercase opacity-40 block mb-1">Мөнгөн (8%)</span>
+                                        <div id="tier8" class="text-lg font-black opacity-90">₮0</div>
+                                    </div>
+                                    <div class="bg-white/5 rounded-2xl p-4 border border-white/10">
+                                        <span class="text-[9px] font-black uppercase opacity-40 block mb-1">Хүрэл (6%)</span>
+                                        <div id="tier6" class="text-lg font-black opacity-90">₮0</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-8">
+                                <a href="https://www.tuss.io/get-demo" target="_blank" class="w-full bg-white/10 hover:bg-white/20 text-white font-black py-4 rounded-[2rem] transition-all flex items-center justify-center gap-3">
+                                    Демо хүсэх <i data-lucide="external-link" class="w-5 h-5"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sales Materials -->
+    <section id="materials" class="py-24">
+        <div class="max-w-7xl mx-auto px-4 text-center mb-16">
+            <h2 class="text-3xl font-bold mb-4 text-slate-900">Борлуулалтын хэрэглэгдэхүүн</h2>
+            <p class="text-slate-500 max-w-xl mx-auto">Харилцагчдад үзүүлэх презентаци, видео заавар болон системчлэлийн бүх материалууд.</p>
+        </div>
+        <div class="max-w-7xl mx-auto px-4 grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="group bg-white p-8 rounded-3xl border border-slate-200 card-shadow section-animate">
+                <div class="w-14 h-14 bg-red-50 text-red-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-red-500 group-hover:text-white transition-all">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M7 21h10a2 2 0 002-2V9.414a1 1 0 00-.293-.707l-5.414-5.414A1 1 0 0012.586 3H7a2 2 0 00-2 2v14a2 2 0 002 2z"></path></svg>
+                </div>
+                <h4 class="font-bold text-xl mb-2">Презентаци</h4>
+                <p class="text-sm text-slate-500 mb-6 leading-relaxed">TUSS платформын философи болон модулиудыг багтаасан танилцуулга.</p>
+                <a href="https://heyzine.com/flip-book/9ad5be910a.html" target="_blank" class="text-blue-600 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Үзэх <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
+            </div>
+
+            <div class="group bg-white p-8 rounded-3xl border border-slate-200 card-shadow section-animate">
+                <div class="w-14 h-14 bg-blue-50 text-blue-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-blue-500 group-hover:text-white transition-all">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+                </div>
+                <h4 class="font-bold text-xl mb-2">Заавар хичээл</h4>
+                <p class="text-sm text-slate-500 mb-6 leading-relaxed">Програмын үндсэн модулиудын ажиллагааг харуулсан видео бичлэгүүд.</p>
+                <a href="https://tuss-demo.vercel.app/" target="_blank" class="text-blue-600 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Үзэх <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
+            </div>
+
+            <div class="group bg-white p-8 rounded-3xl border border-slate-200 card-shadow section-animate">
+                <div class="w-14 h-14 bg-amber-50 text-amber-500 rounded-2xl flex items-center justify-center mb-6 group-hover:bg-amber-500 group-hover:text-white transition-all">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path></svg>
+                </div>
+                <h4 class="font-bold text-xl mb-2">Модуль танилцуулга</h4>
+                <p class="text-sm text-slate-500 mb-6 leading-relaxed">Системийн модуль бүрийн дэлгэрэнгүй функцүүдийн тайлбар.</p>
+                <a href="https://product-livid-pi.vercel.app/" target="_blank" class="text-blue-600 font-bold flex items-center gap-2 group-hover:gap-3 transition-all">Нээх <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Organization Info Section -->
+    <section id="info" class="py-24 bg-slate-100 border-t">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-12">Байгууллагын мэдээлэл</h2>
+            <a href="https://tussolution.vercel.app/" target="_blank" class="group block bg-white rounded-[2.5rem] p-10 md:p-14 border border-slate-200 card-shadow section-animate hover:border-blue-500 transition-all relative overflow-hidden">
+                <div class="flex flex-col md:flex-row items-center gap-10">
+                    <div class="w-32 h-32 bg-white rounded-[1.5rem] flex items-center justify-center shrink-0 shadow-sm p-4">
+                        <img src="Layer 1 (2).png" alt="TUSS.io Brand" class="w-full h-full object-contain">
+                    </div>
+                    <div class="text-left flex-1">
+                        <div class="flex items-center gap-3 mb-2">
+                            <h3 class="text-2xl font-black text-slate-900 group-hover:text-blue-600 transition">ТУС Солюшн ХХК</h3>
+                        </div>
+                        <p class="text-slate-600 mb-6 text-sm leading-relaxed">Байгууллагын засаглал, системчлэлийн чиглэлээр мэргэшсэн Монголын технологийн компани. Системчлэлийн хүчээр бизнесийг хялбарчилна.</p>
+                        <div class="text-blue-600 font-black uppercase text-xs tracking-widest flex items-center gap-2">Вэб сайтаар зочлох <i data-lucide="chevron-right" class="w-4 h-4"></i></div>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-500 py-16 text-center text-xs">
+        <img src="Layer 1 (2).png" alt="Logo" class="h-8 w-auto mx-auto mb-6 opacity-50 grayscale brightness-200">
+        <p>© 2024 TUSS.io Partners Resource Hub. ТУС Солюшн ХХК.</p>
+    </footer>
+
+    <!-- Modal -->
+    <div id="main-modal" class="modal-overlay" onclick="closeModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+            <button onclick="closeModal()" class="absolute top-8 right-8 p-3 bg-slate-100 hover:bg-slate-200 rounded-full transition-colors text-slate-500 z-10"><i data-lucide="x" class="w-6 h-6"></i></button>
+            <div id="modal-body" class="p-10 md:p-14 text-left"></div>
+        </div>
+    </div>
+
+    <script>
+        const PRICES = { Starter: 24000, Standard: 33000, Premium: 55000, Compliance: 350000 };
+        const state = { Starter: 0, Standard: 0, Premium: 0, Compliance: 0, Months: 1 };
+        
+        const DETAILS = {
+            Starter: { icon: "rocket", title: "Starter", desc: "Ажлаа системчилж эхлэх суурь.", features: ["Ажил модуль", "7 хоног модуль", "Профайл", "Дурын 1 модуль"] },
+            Standard: { icon: "sparkles", title: "Standard", desc: "Өсөлтөд тэмүүлж буй компаниудад.", features: ["OKR модуль", "HR модуль", "Оношилгоо", "Dashboard"] },
+            Premium: { icon: "zap", title: "Premium", desc: "Цогц удирдлага & Зөвлөх үйлчилгээ.", features: ["Бүх модулиуд", "Чанартай зөвлөх", "AI Чатбот", "Эрхийн тохиргоо"] },
+            Compliance: { icon: "shield-check", title: "Compliance", desc: "Эрсдлийн удирдлага & AI.", features: ["Эрсдлийн удирдлага", "AI GAP шинжилгээ", "API холболт", "Комплаенс"] }
+        };
+
+        function update(key, val) {
+            state[key] = parseInt(val);
+            const label = document.getElementById(`val-${key}`);
+            if (label) {
+                if (key === 'Months') {
+                    label.innerText = val < 12 ? val + ' Сар' : (val/12 === 1 ? '1 Жил' : '2 Жил');
+                } else {
+                    label.innerText = val;
+                }
+            }
+            calculate();
+        }
+
+        function calculate() {
+            const container = document.getElementById('summary-container');
+            const totalEl = document.getElementById('display-total');
+            const tier10 = document.getElementById('tier10');
+            const tier8 = document.getElementById('tier8');
+            const tier6 = document.getElementById('tier6');
+            
+            if (!container) return;
+            container.innerHTML = '';
+            
+            let rawTotal = 0;
+            let totalAccounts = 0;
+            let hasSelection = false;
+
+            ['Starter', 'Standard', 'Premium', 'Compliance'].forEach(p => {
+                if (state[p] > 0) {
+                    const lineTotal = state[p] * PRICES[p] * state.Months;
+                    rawTotal += lineTotal;
+                    totalAccounts += state[p];
+                    hasSelection = true;
+                    container.innerHTML += `
+                        <div class="flex justify-between items-center text-sm font-medium">
+                            <span class="text-slate-400">${p} багц (${state[p]}):</span>
+                            <span class="text-white">${format(lineTotal)}</span>
+                        </div>`;
+                }
+            });
+
+            if (!hasSelection) {
+                container.innerHTML = '<p class="text-slate-500 text-center py-6 italic opacity-50 text-xs">Багцаа сонгоно уу...</p>';
+                if(totalEl) totalEl.innerText = '0 ₮';
+                [tier10, tier8, tier6].forEach(el => el.innerText = '₮0');
+                return;
+            }
+
+            // Discounts
+            let volRate = 0;
+            if (totalAccounts >= 300) volRate = 0.30;
+            else if (totalAccounts >= 200) volRate = 0.20;
+            else if (totalAccounts >= 100) volRate = 0.10;
+            const volDiscount = rawTotal * volRate;
+            
+            let subTotalAfterVol = rawTotal - volDiscount;
+            let yearRate = state.Months >= 12 ? 0.18 : 0;
+            const yearDiscount = subTotalAfterVol * yearRate;
+            
+            let subTotalFinal = subTotalAfterVol - yearDiscount;
+            const vatAmt = document.getElementById('chk-vat').checked ? subTotalFinal * 0.1 : 0;
+            const finalTotal = subTotalFinal + vatAmt;
+
+            if (volDiscount > 0) container.innerHTML += `<div class="flex justify-between text-xs text-blue-400 mt-2"><span>Олон хэрэглэгч (-${volRate*100}%):</span><span>-${format(volDiscount)}</span></div>`;
+            if (yearDiscount > 0) container.innerHTML += `<div class="flex justify-between text-xs text-emerald-400 mt-1"><span>Хугацаа (-18%):</span><span>-${format(yearDiscount)}</span></div>`;
+
+            totalEl.innerText = format(finalTotal);
+
+            // AGENT PROFITS
+            tier10.innerText = format(finalTotal * 0.10);
+            tier8.innerText = format(finalTotal * 0.08);
+            tier6.innerText = format(finalTotal * 0.06);
+
+            lucide.createIcons();
+        }
+
+        function format(v) { return '₮' + new Intl.NumberFormat('mn-MN').format(Math.round(v)); }
+
+        function openPlanDetails(p) {
+            const d = DETAILS[p];
+            const body = document.getElementById('modal-body');
+            body.innerHTML = `
+                <div class="flex items-center gap-6 mb-10">
+                    <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100"><i data-lucide="${d.icon}" class="w-8 h-8 text-blue-600"></i></div>
+                    <div><h3 class="text-3xl font-black text-[#00103D] tracking-tight">${d.title}</h3><p class="text-blue-600 font-bold text-xs uppercase mt-1 tracking-widest">${d.desc}</p></div>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    ${d.features.map(f => `<div class="p-4 bg-slate-50 border border-slate-100 rounded-xl flex items-center gap-3"><i data-lucide="check-circle" class="text-blue-600 w-5 h-5"></i><span class="font-bold text-slate-800 text-sm">${f}</span></div>`).join('')}
+                </div>`;
+            lucide.createIcons();
+            document.getElementById('main-modal').style.display = 'flex';
+        }
+
+        function closeModal() { document.getElementById('main-modal').style.display = 'none'; }
+        window.onload = () => { lucide.createIcons(); calculate(); }
+    </script>
+</body>
+</html>
