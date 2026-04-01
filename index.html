@@ -239,7 +239,7 @@
         </div>
     </section>
 
-    <!-- Interactive Calculator (WITH NEW TIERS) -->
+    <!-- Interactive Calculator -->
     <section id="calculator" class="py-24 bg-white border-t border-slate-100">
         <div class="max-w-7xl mx-auto px-4">
             <div class="text-center mb-16">
@@ -334,7 +334,7 @@
                         </div>
                     </div>
 
-                    <!-- Summary & Profit (UPDATED TIERS) -->
+                    <!-- Summary & Profit -->
                     <div class="lg:col-span-5 bg-[#00103D] text-white p-10 md:p-16 flex flex-col relative">
                         <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500/10 blur-[100px] pointer-events-none"></div>
                         
@@ -354,16 +354,16 @@
                             </div>
                             <div id="display-total" class="text-5xl font-black text-white tracking-tighter mb-12 leading-none text-left">0 ₮</div>
                             
-                            <!-- AGENT COMMISSIONS (15%, 20%, 25%) -->
+                            <!-- AGENT COMMISSIONS -->
                             <div class="space-y-4">
                                 <p class="text-[10px] font-black text-slate-500 uppercase tracking-[0.3em] mb-4">Урамшууллын шатлал (Эхний жил)</p>
                                 
                                 <!-- Platinum -->
-                                <div class="bg-blue-600 rounded-[2rem] p-6 shadow-2xl shadow-blue-600/20 group hover:scale-[1.02] transition-transform cursor-default">
+                                <div onclick="openTierDetails('Platinum')" class="bg-blue-600 rounded-[2rem] p-6 shadow-2xl shadow-blue-600/20 group hover:scale-[1.02] transition-all cursor-pointer active:scale-95 border border-transparent hover:border-white/20">
                                     <div class="flex justify-between items-center mb-2">
                                         <div class="flex flex-col">
                                             <span class="text-[11px] font-black uppercase tracking-widest opacity-80">Platinum (25%)</span>
-                                            <span class="text-[9px] opacity-60 uppercase font-bold tracking-tighter">31+ Харилцагч</span>
+                                            <span class="text-[9px] opacity-60 uppercase font-bold tracking-tighter">31+ Харилцагч <i data-lucide="info" class="inline w-2 h-2 ml-1"></i></span>
                                         </div>
                                         <div class="w-2 h-2 bg-purple-300 rounded-full animate-pulse shadow-[0_0_10px_rgba(168,85,247,1)]"></div>
                                     </div>
@@ -372,15 +372,15 @@
 
                                 <div class="grid grid-cols-2 gap-4">
                                     <!-- Gold -->
-                                    <div class="bg-white/5 rounded-2xl p-5 border border-white/10 group hover:bg-white/10 transition-colors text-center md:text-left">
+                                    <div onclick="openTierDetails('Gold')" class="bg-white/5 rounded-2xl p-5 border border-white/10 group hover:bg-white/10 transition-all cursor-pointer active:scale-95 hover:border-white/30 text-center md:text-left">
                                         <span class="text-[10px] font-black uppercase tracking-widest opacity-40 block mb-1">Gold (20%)</span>
-                                        <span class="text-[8px] opacity-30 uppercase font-bold block mb-2">11-30 Харилцагч</span>
+                                        <span class="text-[8px] opacity-30 uppercase font-bold block mb-2">11-30 Харилцагч <i data-lucide="info" class="inline w-2 h-2 ml-0.5"></i></span>
                                         <div id="tier20" class="text-xl font-black opacity-90">₮0</div>
                                     </div>
                                     <!-- Associate -->
-                                    <div class="bg-white/5 rounded-2xl p-5 border border-white/10 group hover:bg-white/10 transition-colors text-center md:text-left">
+                                    <div onclick="openTierDetails('Associate')" class="bg-white/5 rounded-2xl p-5 border border-white/10 group hover:bg-white/10 transition-all cursor-pointer active:scale-95 hover:border-white/30 text-center md:text-left">
                                         <span class="text-[10px] font-black uppercase tracking-widest opacity-40 block mb-1">Associate (15%)</span>
-                                        <span class="text-[8px] opacity-30 uppercase font-bold block mb-2">0-10 Харилцагч</span>
+                                        <span class="text-[8px] opacity-30 uppercase font-bold block mb-2">0-10 Харилцагч <i data-lucide="info" class="inline w-2 h-2 ml-0.5"></i></span>
                                         <div id="tier15" class="text-xl font-black opacity-90">₮0</div>
                                     </div>
                                 </div>
@@ -424,25 +424,62 @@
             Compliance: { icon: "shield-check", title: "Compliance", desc: "Эрсдлийн удирдлага & AI.", features: ["Эрсдлийн бүртгэл, удирдлага", "AI суурилсан GAP шинжилгээ", "Бусад системтэй интеграц хийх API", "Комплайнс тайлан, хяналт"] }
         };
 
+        const TIER_DETAILS = {
+            Associate: {
+                title: "Associate Partner",
+                commission: "15%",
+                criteria: "0 - 10 Харилцагч",
+                desc: "Борлуулалтын анхан шатны хамтрагч.",
+                requirements: [
+                    "Системчлэлийн анхан шатны сургалтад хамрагдсан байх",
+                    "Лийд бүртгэх эрхтэй",
+                    "Борлуулалт бүрээс 15% шимтгэл авна",
+                    "ТУС Солюшн-аас зааварчилгаа авах боломжтой"
+                ]
+            },
+            Gold: {
+                title: "Gold Partner",
+                commission: "20%",
+                criteria: "11 - 30 Харилцагч",
+                desc: "Идэвхтэй борлуулалтын хамтрагч.",
+                requirements: [
+                    "Мэргэшсэн зөвлөхийн сертификаттай байх",
+                    "Сайн борлуулалтын түүхтэй",
+                    "Борлуулалт бүрээс 20% шимтгэл авна",
+                    "Шинэ боломжуудыг түрүүлж турших эрх",
+                    "Маркетингийн дэмжлэг авах"
+                ]
+            },
+            Platinum: {
+                title: "Platinum Partner",
+                commission: "25%",
+                criteria: "31+ Харилцагч",
+                desc: "Стратегийн гол хамтрагч.",
+                requirements: [
+                    "Салбарын тэргүүлэх зөвлөх",
+                    "Борлуулалт бүрээс 25% шимтгэл авна",
+                    "Dedicated Account Manager-тэй болно",
+                    "ТУС Солюшн-ийн албан ёсны төлөөлөгч",
+                    "Хамтарсан арга хэмжээ зохион байгуулах эрх",
+                    "Хамгийн өндөр түвшний техникийн дэмжлэг"
+                ]
+            }
+        };
+
         function update(key, val) {
             state[key] = parseInt(val);
             const label = document.getElementById(`val-${key}`);
             if (label) {
                 if (key === 'Months') {
-                    if (val < 12) {
-                        label.innerText = val + ' Сар';
-                    } else if (val == 12) {
-                        label.innerText = '1 Жил';
-                    } else if (val == 24) {
-                        label.innerText = '2 Жил';
-                    } else {
+                    if (val < 12) label.innerText = val + ' Сар';
+                    else if (val == 12) label.innerText = '1 Жил';
+                    else if (val == 24) label.innerText = '2 Жил';
+                    else {
                         const y = Math.floor(val/12);
                         const m = val % 12;
                         label.innerText = m > 0 ? `${y} Жил ${m} Сар` : `${y} Жил`;
                     }
-                } else {
-                    label.innerText = parseInt(val).toLocaleString();
-                }
+                } else label.innerText = parseInt(val).toLocaleString();
             }
             calculate();
         }
@@ -450,8 +487,6 @@
         function calculate() {
             const container = document.getElementById('summary-container');
             const totalEl = document.getElementById('display-total');
-            
-            // Tier Displays
             const tier25 = document.getElementById('tier25');
             const tier20 = document.getElementById('tier20');
             const tier15 = document.getElementById('tier15');
@@ -484,7 +519,6 @@
                 return;
             }
 
-            // Group discounts
             let volRate = 0;
             if (totalAccounts >= 300) volRate = 0.30;
             else if (totalAccounts >= 200) volRate = 0.20;
@@ -503,8 +537,6 @@
             if (yearDiscount > 0) container.innerHTML += `<div class="flex justify-between text-xs text-emerald-400 font-black mt-1"><span>Хугацааны хөнгөлөлт (-18%):</span><span>-${format(yearDiscount)}</span></div>`;
 
             totalEl.innerText = format(finalTotal);
-            
-            // New Agent Profit Calculation (15%, 20%, 25%)
             tier25.innerText = format(finalTotal * 0.25);
             tier20.innerText = format(finalTotal * 0.20);
             tier15.innerText = format(finalTotal * 0.15);
@@ -538,6 +570,41 @@
                     `).join('')}
                 </div>
                 <button onclick="closeModal()" class="w-full mt-12 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all">Хаах</button>
+            `;
+            lucide.createIcons();
+            document.getElementById('main-modal').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function openTierDetails(tier) {
+            const d = TIER_DETAILS[tier];
+            const body = document.getElementById('modal-body');
+            body.innerHTML = `
+                <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-12">
+                    <div class="w-20 h-20 ${tier === 'Platinum' ? 'bg-purple-50 border-purple-100' : (tier === 'Gold' ? 'bg-yellow-50 border-yellow-100' : 'bg-blue-50 border-blue-100')} rounded-3xl flex items-center justify-center shrink-0 border shadow-sm">
+                        <i data-lucide="award" class="w-10 h-10 ${tier === 'Platinum' ? 'text-purple-600' : (tier === 'Gold' ? 'text-yellow-600' : 'text-blue-600')}"></i>
+                    </div>
+                    <div class="text-center md:text-left">
+                        <h3 class="text-4xl font-black text-[#00103D] tracking-tight mb-2">${d.title}</h3>
+                        <p class="text-slate-400 font-black text-xs uppercase tracking-[0.3em] mb-4">${d.desc}</p>
+                        <div class="flex flex-wrap gap-3 justify-center md:justify-start">
+                            <span class="px-4 py-1 bg-slate-100 rounded-full text-[10px] font-black uppercase text-slate-600 tracking-wider">Шимтгэл: ${d.commission}</span>
+                            <span class="px-4 py-1 bg-slate-100 rounded-full text-[10px] font-black uppercase text-slate-600 tracking-wider">Шалгуур: ${d.criteria}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="space-y-6">
+                    <h4 class="text-xs font-black uppercase text-slate-400 tracking-[0.3em]">Давуу тал болон шаардлага</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        ${d.requirements.map(r => `
+                            <div class="p-6 bg-slate-50 border border-slate-200 rounded-2xl flex items-start gap-4">
+                                <i data-lucide="circle-dot" class="text-blue-600 w-4 h-4 mt-1 shrink-0"></i>
+                                <span class="font-bold text-slate-800 text-sm leading-relaxed">${r}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+                <button onclick="closeModal()" class="w-full mt-12 py-5 bg-slate-900 text-white rounded-2xl font-black uppercase tracking-widest hover:bg-black transition-all">Ойлголоо</button>
             `;
             lucide.createIcons();
             document.getElementById('main-modal').style.display = 'flex';
